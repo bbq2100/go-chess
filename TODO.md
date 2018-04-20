@@ -1,0 +1,4 @@
+- board representation
+- rules
+- (search) + evaluation
+- gui integration
