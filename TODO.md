@@ -1,4 +1,4 @@
-- board representation
 - rules
+- FEN parser
 - (search) + evaluation
 - gui integration
