@@ -1,9 +1,25 @@
 package pkg
 
 type Piece struct {
-	Position Square
+	Position *SquarePosition
+	Color    Color
+	Type     PieceType
 }
 
-type Square struct {
-	X, Y int
-}
+type Color int
+
+const (
+	White Color = iota
+	Black
+)
+
+type PieceType int
+
+const (
+	Pawn   PieceType = iota
+	Knight
+	Bishop
+	Rook
+	Queen
+	King
+)

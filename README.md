@@ -1,5 +1,8 @@
 # go-chess
 
+## Design
+- uses a hybrid board representation based on piece-lists and the inverse – mailboxes
+
 ## See also
 Chess engine TUTs:
     - https://chessprogramming.wikispaces.com/Getting+Started
