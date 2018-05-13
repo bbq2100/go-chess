@@ -5,6 +5,8 @@ type Board struct {
 	MoveCountTotal int
 	WhosTurn       Color
 	Squares        [8][8]*Square
+	PositionWhiteKing *SquarePosition
+	PositionBlackKing *SquarePosition
 }
 
 func NewBoard() Board {
@@ -16,5 +18,5 @@ func initSquares() [8][8]*Square {
 }
 
 func initPiecesList() []*Piece {
-	return nil
+	return []*Piece{}
 }
