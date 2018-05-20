@@ -1,4 +1,4 @@
 - rules
-- FEN parser
+- perft
 - (search) + evaluation
 - gui integration

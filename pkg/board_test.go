@@ -2,14 +2,15 @@ package pkg
 
 import (
 	"testing"
-	"reflect"
 )
 
 func TestInitBoardConfiguration(t *testing.T) {
-	b := NewBoard()
-	expectedBoard := Board{MoveCountTotal: 0, WhosTurn: White, Pieces: initPiecesList(), Squares:initSquares()}
+	b := newBoard()
+	expectedBoardAsFan := "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w"
 
-	if !reflect.DeepEqual(b, expectedBoard) {
+	println(b.asFen())
+
+	if !(b.asFen() == expectedBoardAsFan) {
 		t.Fail()
 	}
 }

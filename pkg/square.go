@@ -1,18 +1,14 @@
 package pkg
 
-type SquarePosition struct {
+type squarePosition struct {
 	File, Rank int
 }
 
-type PieceOnSquare struct {
-	Position *SquarePosition
-	Piece    *Piece
+func (s square) isSquareOccupied() bool {
+	return s.piece != nil
 }
 
-func (p PieceOnSquare) IsSquareOccupied() bool {
-	return p.Piece != nil
-}
-
-type Square struct {
-	PieceOnSquare *SquarePosition
+type square struct {
+	position squarePosition
+	piece    *piece
 }
