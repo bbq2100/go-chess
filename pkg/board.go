@@ -23,7 +23,7 @@ func initBoard() (squares [8][8]*square, pieces []*piece) {
 	emptySquare := ""
 
 	ss := [8][8]*square{}
-	ps := make([]*piece, 32) // since empty pieces will not be part of this list
+	ps := make([]*piece, 0)
 
 	for i, e := range [][]struct {
 		file      int
