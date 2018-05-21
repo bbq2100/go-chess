@@ -1,8 +1,11 @@
 package pkg
 
 type piece struct {
-	position  *squarePosition
-	pieceType string
+	position   square
+	pieceType  string
+	color      color
+	canCastle  bool
+	isCaptured bool
 }
 
 type color int
@@ -13,16 +16,10 @@ const (
 )
 
 const (
-	bPawn   = "p"
-	bKnight = "n"
-	bBishop = "b"
-	bRook   = "r"
-	bQueen  = "q"
-	bKing   = "k"
-	wPawn   = "P"
-	wKnight = "N"
-	wBishop = "B"
-	wRook   = "R"
-	wQueen  = "Q"
-	wKing   = "K"
+	pawn   = "p"
+	knight = "n"
+	bishop = "b"
+	rook   = "r"
+	queen  = "q"
+	king   = "k"
 )

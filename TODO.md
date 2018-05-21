@@ -1,4 +1,5 @@
 - rules
 - perft
+- opening moves (from book)
 - (search) + evaluation
 - gui integration

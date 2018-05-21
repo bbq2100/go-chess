@@ -14,3 +14,8 @@ func TestInitBoardConfiguration(t *testing.T) {
 		t.Fail()
 	}
 }
+
+func TestMakeMove(t *testing.T) {
+	newBoard()
+
+}
