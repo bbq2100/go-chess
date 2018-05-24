@@ -2,6 +2,7 @@ package pkg
 
 import (
 	"bytes"
+	"errors"
 	"strconv"
 	"strings"
 )
@@ -46,19 +47,19 @@ func initBoard() []*piece {
 			ps = append(ps, createPiece(square{file, r}, rook, color))
 		}
 
-		for _, f := range []int{2, 7} {
-			for r := 1; r < 9; r++ {
-				color := whichColor(f)
-				ps = append(ps, createPiece(square{f, r}, pawn, color))
-			}
-		}
+	}
 
+	for _, f := range []int{2, 7} {
+		for r := 1; r < 9; r++ {
+			color := whichColor(f)
+			ps = append(ps, createPiece(square{f, r}, pawn, color))
+		}
 	}
 
 	return ps
 }
 
-func whichColor(file int) color {
+func whichColor(file int) color { // color mapping for the board initial position
 	switch file {
 	case 1:
 		return white
@@ -127,4 +128,34 @@ func (b *board) asFen() string {
 	}
 
 	return buffer.String()
+}
+
+func (b *board) makeMove(m *move) error {
+	from, to, e := m.toSquare()
+
+	if e != nil {
+		return e
+	}
+
+	found := false
+
+	for _, p := range b.pieces {
+		if p.position.file == from.file && p.position.rank == from.rank {
+			found = true
+			p.position = to
+			switch p.color {
+			case white:
+				b.whosTurn = black
+			case black:
+				b.whosTurn = white
+			}
+			break
+		}
+	}
+
+	if !found {
+		return errors.New("'from piece' is not existing")
+	}
+
+	return nil
 }
