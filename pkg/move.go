@@ -20,6 +20,11 @@ var (
 	}
 )
 
+type undoMove struct {
+	from square
+	to   square
+}
+
 func (m *move) toSquare() (from, to square, err error) {
 	do := func(s string) (file int, rank int, err error) {
 		f, e := strconv.Atoi(s[1:2])

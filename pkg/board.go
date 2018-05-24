@@ -11,10 +11,11 @@ type board struct {
 	pieces         []*piece
 	moveCountTotal int
 	whosTurn       color
+	history        *stack
 }
 
 func newBoard() board {
-	return board{moveCountTotal: 0, whosTurn: white, pieces: initBoard()}
+	return board{moveCountTotal: 0, whosTurn: white, pieces: initBoard(), history: newStack()}
 }
 
 func initBoard() []*piece {
@@ -140,10 +141,12 @@ func (b *board) makeMove(m *move) error {
 	found := false
 
 	for _, p := range b.pieces {
-		if p.position.file == from.file && p.position.rank == from.rank {
+		if p.position == from {
 			found = true
 			p.position = to
-			switch p.color {
+			b.moveCountTotal += 1
+			b.history.add(undoMove{from: from, to: to})
+			switch b.whosTurn {
 			case white:
 				b.whosTurn = black
 			case black:
@@ -157,5 +160,39 @@ func (b *board) makeMove(m *move) error {
 		return errors.New("'from piece' is not existing")
 	}
 
+	return nil
+}
+
+func (b *board) undoMove() error {
+	history := b.history
+	if history.size() > 0 {
+		move1 := history.pop()
+		m, ok := move1.(undoMove)
+
+		if !ok {
+			panic("Type cast error")
+		}
+
+		found := false
+
+		for _, p := range b.pieces {
+			if p.position == m.to {
+				found = true
+				p.position = m.from
+				b.moveCountTotal -= 1
+				switch b.whosTurn {
+				case white:
+					b.whosTurn = black
+				case black:
+					b.whosTurn = white
+				}
+				break
+			}
+		}
+
+		if !found {
+			return errors.New("'from piece' is not existing")
+		}
+	}
 	return nil
 }
